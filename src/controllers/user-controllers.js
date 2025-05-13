@@ -55,9 +55,23 @@ exports.logIn = async (req, res) => {
     });
 }
 exports.getAllUser = async (req, res) => {
+   //try {
     const users = await UsersModels.find();
+    if (!users) {
+        res.status(400).json({
+            status: '400',
+            message: 'ບໍ່ມີຂໍ້ມູນ',   
+        });
+    }
     res.status(200).json({
         status: 'success',
         data: users,
     });
+//    } catch (error) {
+//     res.status(500).json({
+//         status: '500',
+//         message: 'ກາລຸນາກວດສອບ ເເລ້ວລອງໃໝ່',
+//         error: error.message,
+//     });
+//    }
 }
